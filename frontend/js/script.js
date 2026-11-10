@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+﻿document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const searchForm = document.getElementById('search-form');
     const datasetForm = document.getElementById('dataset-form');
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideError();
         
         // Make API request
-        fetch('https://redditsentimentanalyzer-x72n.onrender.com/analyze', {
+        fetch('/analyze', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -445,13 +445,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add information about positive/negative ratio
         if (posToNegRatio > 2) {
-            analysisContent += `a strongly positive reaction with ${posToNegRatio}× more positive than negative comments. `;
+            analysisContent += `a strongly positive reaction with ${posToNegRatio}Ã— more positive than negative comments. `;
         } else if (posToNegRatio > 1) {
-            analysisContent += `a somewhat positive reaction with ${posToNegRatio}× more positive than negative comments. `;
+            analysisContent += `a somewhat positive reaction with ${posToNegRatio}Ã— more positive than negative comments. `;
         } else if (posToNegRatio < 0.5) {
-            analysisContent += `a strongly negative reaction with ${(1/posToNegRatio).toFixed(2)}× more negative than positive comments. `;
+            analysisContent += `a strongly negative reaction with ${(1/posToNegRatio).toFixed(2)}Ã— more negative than positive comments. `;
         } else if (posToNegRatio < 1) {
-            analysisContent += `a somewhat negative reaction with ${(1/posToNegRatio).toFixed(2)}× more negative than positive comments. `;
+            analysisContent += `a somewhat negative reaction with ${(1/posToNegRatio).toFixed(2)}Ã— more negative than positive comments. `;
         } else {
             analysisContent += `a balanced distribution between positive and negative sentiments. `;
         }
@@ -1270,7 +1270,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function loadAvailableDatasets() {
-        fetch('https://redditsentimentanalyzer-x72n.onrender.com/get_available_datasets')
+        fetch('/get_available_datasets')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to load available datasets');
@@ -1333,7 +1333,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setDatasetLoadingState(true);
         
         // Make API request to get dataset info with all subreddits
-        fetch('https://redditsentimentanalyzer-x72n.onrender.com/analyze_dataset', {
+        fetch('/analyze_dataset', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -1421,7 +1421,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Make API request
-        fetch('https://redditsentimentanalyzer-x72n.onrender.com/analyze_dataset', {
+        fetch('/analyze_dataset', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

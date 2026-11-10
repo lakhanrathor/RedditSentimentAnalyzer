@@ -14,13 +14,13 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from data_reader import get_dataset_analysis, safe_read_csv
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from flask_cors import CORS
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
-# load_dotenv()
+load_dotenv()
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend', static_url_path='')
 CORS(app)
 app.secret_key = os.environ.get("SESSION_SECRET", "default-secret-key")
 
@@ -95,10 +95,10 @@ CSV_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/re
 # Cache for CSV analysis results
 csv_analysis_cache = {}
 
-# @app.route('/')
-# def index():
-#     """Render the main page of the application."""
-#     return render_template('index.html')
+@app.route('/')
+def index():
+    """Serve the frontend."""
+    return app.send_static_file('index.html')
 
 def clean_text(text):
     """
